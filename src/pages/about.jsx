@@ -15,9 +15,9 @@ const About = () => {
     };
 
     const timerId = setTimeout(getProduct, 1000);
-    // return () => {
-    //   clearTimeout(timerId);
-    // };
+    return () => {
+      clearTimeout(timerId);
+    };
   }, [productName]);
   return (
     <div className="min-h-screen w-full bg-white text-black  pt-24">
