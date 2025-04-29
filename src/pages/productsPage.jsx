@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 
@@ -6,14 +7,25 @@ const ProductsPage = () => {
   const location = useLocation();
   const productId = location.state.productId;
   useEffect(() => {
+    // const getProduct = async () => {
+    //   const res = await fetch(`https://dummyjson.com/products/${productId}`);
+    //   const data = await res.json();
+    //   setProductData(data);
+    // };
+
     const getProduct = async () => {
-      const res = await fetch(`https://dummyjson.com/products/${productId}`);
-      const data = await res.json();
-      console.log(data);
-      setProductData(data);
+      try {
+        const res = await axios.get(
+          `https://dummyjson.com/products/${productId}`
+        );
+        setProductData(res.data);
+      } catch (e) {
+        console.error(e);
+      }
     };
     getProduct();
   }, []);
+
   return (
     <div className="min-h-screen w-full pt-24">
       <div className="w-full flex items-star justify-between">
